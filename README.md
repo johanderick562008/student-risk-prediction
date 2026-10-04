@@ -83,15 +83,19 @@ You do **not** need a Kaggle API key.
 student-risk-prediction\data\dcs_student_data.csv
 ```
 
-The file may also be named `student_dataset.csv`, or be the only `.csv` in `data\`. The dataset is
-never uploaded anywhere by this project.
+The file may also be named `student_dataset.csv`, or be the only `.csv` in `data\`.
+
+The repository includes `data/students_anonymized.csv`: the same rows with Student_ID, names and
+emails removed (created by `python src/anonymize_data.py`). It is used automatically when the raw
+file is missing, e.g. for the online deployment, and gives identical results.
 
 ## 3. Project structure
 
 ```
 student-risk-prediction/
 ├── data/
-│   └── dcs_student_data.csv        # downloaded from Kaggle (not committed)
+│   ├── dcs_student_data.csv        # downloaded from Kaggle (not committed)
+│   └── students_anonymized.csv     # same data without personal columns (committed)
 ├── models/
 │   ├── risk_model.pkl              # saved scikit-learn pipeline
 │   └── model_metadata.json         # chosen model, features, thresholds, versions
@@ -102,6 +106,7 @@ student-risk-prediction/
 │   └── risk_report.csv             # Student | Attendance | Risk | Recommendation
 ├── src/
 │   ├── config.py                   # paths, thresholds, feature lists (change things here)
+│   ├── anonymize_data.py           # creates the anonymised copy of the dataset
 │   ├── data_loader.py              # find + load CSV, map column names, validate
 │   ├── eda.py                      # exploratory analysis and all chart functions
 │   ├── preprocessing.py            # cleaning + scikit-learn preprocessing pipeline
@@ -157,7 +162,7 @@ Run these from the `student-risk-prediction` folder with the virtual environment
 | 3. Evaluate the saved model | `python src/evaluate_model.py` | train vs test metrics, classification reports |
 | 4. Predict everyone + report | `python src/predict.py` | `reports/risk_report.csv` + an example student |
 | 5. Launch the dashboard | `streamlit run app.py` | opens <http://localhost:8501> |
-| Run the tests | `python -m pytest -v` | 26 tests |
+| Run the tests | `python -m pytest -v` | 27 tests |
 
 Training takes well under a minute. Everything uses `random_state = 42`, so results are reproducible.
 
@@ -424,7 +429,7 @@ Only anonymised IDs are included. No names, emails or original IDs.
 python -m pytest -v
 ```
 
-26 tests in `tests/test_pipeline.py` use small hand-made records (no dataset or saved model needed):
+27 tests in `tests/test_pipeline.py` use small hand-made records (no dataset or saved model needed):
 missing dataset file, column-name mapping, unexpected columns, the risk rule incl. boundaries and
 High-over-Medium priority, cleaning (duplicates, typos, `"\t41"`, impossible values, PII removal),
 invalid/empty prediction input, missing model file, single and bulk prediction, report columns and

@@ -22,7 +22,10 @@ FIGURES_DIR = REPORTS_DIR / "figures"
 
 # The Kaggle download contains "dcs_student_data.csv". "student_dataset.csv"
 # is also accepted so the file can be renamed without touching code.
-CSV_CANDIDATES = ["dcs_student_data.csv", "student_dataset.csv"]
+# The anonymised copy (no names/emails/IDs, see src/anonymize_data.py) is
+# the fallback used by the deployed dashboard; the raw file wins if present.
+ANONYMIZED_CSV = DATA_DIR / "students_anonymized.csv"
+CSV_CANDIDATES = ["dcs_student_data.csv", "student_dataset.csv", ANONYMIZED_CSV.name]
 
 MODEL_PATH = MODELS_DIR / "risk_model.pkl"
 MODEL_METADATA_PATH = MODELS_DIR / "model_metadata.json"

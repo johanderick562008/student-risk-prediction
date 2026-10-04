@@ -9,8 +9,10 @@ __pycache__/
 
 # Dataset: download it from Kaggle yourself (see README). It contains
 # (synthetic) names and e-mails, so it is not committed to the repository.
+# Only the anonymised copy (no personal columns) is committed.
 data/*.csv
 data/*.zip
+!data/students_anonymized.csv
 
 # Editor / OS files
 .vscode/

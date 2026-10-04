@@ -85,6 +85,13 @@ def test_missing_dataset_file(tmp_path):
         find_csv(tmp_path)
 
 
+def test_anonymized_copy_is_used_when_raw_file_missing(tmp_path):
+    (tmp_path / "students_anonymized.csv").write_text("a\n1\n")
+    assert find_csv(tmp_path).name == "students_anonymized.csv"
+    (tmp_path / "dcs_student_data.csv").write_text("a\n1\n")
+    assert find_csv(tmp_path).name == "dcs_student_data.csv"  # raw file wins
+
+
 def test_column_aliases_are_mapped():
     df = pd.DataFrame(columns=["Attendance", "midterm score", "Total Score"])
     renamed, mapping = standardize_columns(df)
