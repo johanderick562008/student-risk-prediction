@@ -1,0 +1,395 @@
+{
+  "selected_model": "Decision Tree",
+  "cleaning_log": {
+    "rows_before": 10030,
+    "duplicates_removed": 30,
+    "invalid_values_set_to_missing": {
+      "Age": 2,
+      "Attendance (%)": 3,
+      "Midterm_Score": 2,
+      "Final_Score": 2
+    },
+    "rows_after": 10000,
+    "missing_after_cleaning": {
+      "Age": 202,
+      "Attendance (%)": 202,
+      "Midterm_Score": 202,
+      "Final_Score": 202,
+      "Assignments_Avg": 200,
+      "Quizzes_Avg": 200,
+      "Participation_Score": 200,
+      "Projects_Score": 200,
+      "math_score": 1
+    }
+  },
+  "label_distribution": {
+    "Low": 3476,
+    "Medium": 2762,
+    "High": 3560
+  },
+  "unlabelled_rows": 202,
+  "models": {
+    "Baseline: most frequent class": {
+      "train": {
+        "accuracy": 0.3634,
+        "macro_precision": 0.1211,
+        "macro_recall": 0.3333,
+        "macro_f1": 0.1777,
+        "high_precision": 0.3634,
+        "high_recall": 1.0,
+        "high_f1": 0.533
+      },
+      "test": {
+        "accuracy": 0.3633,
+        "macro_precision": 0.1211,
+        "macro_recall": 0.3333,
+        "macro_f1": 0.1776,
+        "high_precision": 0.3633,
+        "high_recall": 1.0,
+        "high_f1": 0.5329
+      },
+      "confusion_test": [
+        [
+          0,
+          0,
+          695
+        ],
+        [
+          0,
+          0,
+          553
+        ],
+        [
+          0,
+          0,
+          712
+        ]
+      ]
+    },
+    "Baseline: attendance-only rule": {
+      "train": {
+        "accuracy": 0.8329,
+        "macro_precision": 0.8696,
+        "macro_recall": 0.8205,
+        "macro_f1": 0.8265,
+        "high_precision": 1.0,
+        "high_recall": 0.8118,
+        "high_f1": 0.8961
+      },
+      "test": {
+        "accuracy": 0.8071,
+        "macro_precision": 0.8522,
+        "macro_recall": 0.794,
+        "macro_f1": 0.7996,
+        "high_precision": 1.0,
+        "high_recall": 0.7725,
+        "high_f1": 0.8716
+      },
+      "confusion_test": [
+        [
+          695,
+          0,
+          0
+        ],
+        [
+          216,
+          337,
+          0
+        ],
+        [
+          116,
+          46,
+          550
+        ]
+      ]
+    },
+    "Logistic Regression": {
+      "cv": {
+        "accuracy": 0.7008,
+        "macro_precision": 0.6867,
+        "macro_recall": 0.6872,
+        "macro_f1": 0.6869,
+        "high_precision": 0.8267,
+        "high_recall": 0.8343,
+        "high_f1": 0.8305
+      },
+      "train": {
+        "accuracy": 0.7022,
+        "macro_precision": 0.6883,
+        "macro_recall": 0.6887,
+        "macro_f1": 0.6885,
+        "high_precision": 0.8276,
+        "high_recall": 0.8343,
+        "high_f1": 0.8309
+      },
+      "test": {
+        "accuracy": 0.6883,
+        "macro_precision": 0.6775,
+        "macro_recall": 0.6754,
+        "macro_f1": 0.676,
+        "high_precision": 0.8341,
+        "high_recall": 0.7978,
+        "high_f1": 0.8155
+      },
+      "per_class_test": {
+        "Low": {
+          "precision": 0.6684563758389261,
+          "recall": 0.7165467625899281,
+          "f1-score": 0.6916666666666667,
+          "support": 695.0
+        },
+        "Medium": {
+          "precision": 0.5299625468164794,
+          "recall": 0.5117540687160941,
+          "f1-score": 0.5206991720331187,
+          "support": 553.0
+        },
+        "High": {
+          "precision": 0.8340675477239354,
+          "recall": 0.797752808988764,
+          "f1-score": 0.8155061019382628,
+          "support": 712.0
+        },
+        "accuracy": 0.688265306122449,
+        "macro avg": {
+          "precision": 0.677495490126447,
+          "recall": 0.6753512134315954,
+          "f1-score": 0.6759573135460161,
+          "support": 1960.0
+        },
+        "weighted avg": {
+          "precision": 0.689542124273984,
+          "recall": 0.688265306122449,
+          "f1-score": 0.688415979616169,
+          "support": 1960.0
+        }
+      },
+      "confusion_test": [
+        [
+          498,
+          197,
+          0
+        ],
+        [
+          157,
+          283,
+          113
+        ],
+        [
+          90,
+          54,
+          568
+        ]
+      ],
+      "agreement_with_rule_test": 0.7893,
+      "feature_importance": {
+        "Attendance (%)": 1.2426,
+        "Midterm_Score": 0.0293,
+        "test_preparation_course_1.0": 0.0276,
+        "Projects_Score": 0.0242,
+        "Quizzes_Avg": 0.0234,
+        "Assignments_Avg": 0.0043,
+        "Participation_Score": 0.0021
+      }
+    },
+    "Decision Tree": {
+      "cv": {
+        "accuracy": 0.8326,
+        "macro_precision": 0.8692,
+        "macro_recall": 0.8202,
+        "macro_f1": 0.8262,
+        "high_precision": 0.9996,
+        "high_recall": 0.8118,
+        "high_f1": 0.896
+      },
+      "train": {
+        "accuracy": 0.8329,
+        "macro_precision": 0.8696,
+        "macro_recall": 0.8205,
+        "macro_f1": 0.8265,
+        "high_precision": 1.0,
+        "high_recall": 0.8118,
+        "high_f1": 0.8961
+      },
+      "test": {
+        "accuracy": 0.8071,
+        "macro_precision": 0.8522,
+        "macro_recall": 0.794,
+        "macro_f1": 0.7996,
+        "high_precision": 1.0,
+        "high_recall": 0.7725,
+        "high_f1": 0.8716
+      },
+      "per_class_test": {
+        "Low": {
+          "precision": 0.676728334956183,
+          "recall": 1.0,
+          "f1-score": 0.8072009291521487,
+          "support": 695.0
+        },
+        "Medium": {
+          "precision": 0.8798955613577023,
+          "recall": 0.6094032549728752,
+          "f1-score": 0.7200854700854701,
+          "support": 553.0
+        },
+        "High": {
+          "precision": 1.0,
+          "recall": 0.7724719101123596,
+          "f1-score": 0.8716323296354992,
+          "support": 712.0
+        },
+        "accuracy": 0.8071428571428572,
+        "macro avg": {
+          "precision": 0.8522079654379618,
+          "recall": 0.7939583883617449,
+          "f1-score": 0.7996395762910393,
+          "support": 1960.0
+        },
+        "weighted avg": {
+          "precision": 0.8514838970537534,
+          "recall": 0.8071428571428572,
+          "f1-score": 0.8060276170502468,
+          "support": 1960.0
+        }
+      },
+      "confusion_test": [
+        [
+          695,
+          0,
+          0
+        ],
+        [
+          216,
+          337,
+          0
+        ],
+        [
+          116,
+          46,
+          550
+        ]
+      ],
+      "agreement_with_rule_test": 1.0,
+      "feature_importance": {
+        "Attendance (%)": 0.9962,
+        "Participation_Score": 0.0014,
+        "Quizzes_Avg": 0.0012,
+        "Projects_Score": 0.001,
+        "Assignments_Avg": 0.0003,
+        "Midterm_Score": 0.0,
+        "test_preparation_course_1.0": 0.0
+      }
+    },
+    "Random Forest": {
+      "cv": {
+        "accuracy": 0.8317,
+        "macro_precision": 0.8677,
+        "macro_recall": 0.8193,
+        "macro_f1": 0.8253,
+        "high_precision": 0.9991,
+        "high_recall": 0.8118,
+        "high_f1": 0.8958
+      },
+      "train": {
+        "accuracy": 0.833,
+        "macro_precision": 0.8696,
+        "macro_recall": 0.8206,
+        "macro_f1": 0.8267,
+        "high_precision": 1.0,
+        "high_recall": 0.8118,
+        "high_f1": 0.8961
+      },
+      "test": {
+        "accuracy": 0.8071,
+        "macro_precision": 0.8517,
+        "macro_recall": 0.7941,
+        "macro_f1": 0.7998,
+        "high_precision": 1.0,
+        "high_recall": 0.7725,
+        "high_f1": 0.8716
+      },
+      "per_class_test": {
+        "Low": {
+          "precision": 0.6770731707317074,
+          "recall": 0.9985611510791367,
+          "f1-score": 0.8069767441860465,
+          "support": 695.0
+        },
+        "Medium": {
+          "precision": 0.8779220779220779,
+          "recall": 0.6112115732368897,
+          "f1-score": 0.720682302771855,
+          "support": 553.0
+        },
+        "High": {
+          "precision": 1.0,
+          "recall": 0.7724719101123596,
+          "f1-score": 0.8716323296354992,
+          "support": 712.0
+        },
+        "accuracy": 0.8071428571428572,
+        "macro avg": {
+          "precision": 0.8516650828845952,
+          "recall": 0.7940815448094619,
+          "f1-score": 0.7997637921978002,
+          "support": 1960.0
+        },
+        "weighted avg": {
+          "precision": 0.8510493687497171,
+          "recall": 0.8071428571428572,
+          "f1-score": 0.8061165149707212,
+          "support": 1960.0
+        }
+      },
+      "confusion_test": [
+        [
+          694,
+          1,
+          0
+        ],
+        [
+          215,
+          338,
+          0
+        ],
+        [
+          116,
+          46,
+          550
+        ]
+      ],
+      "agreement_with_rule_test": 0.999,
+      "feature_importance": {
+        "Attendance (%)": 0.9507,
+        "Assignments_Avg": 0.0104,
+        "Projects_Score": 0.0101,
+        "Midterm_Score": 0.0097,
+        "Quizzes_Avg": 0.0093,
+        "Participation_Score": 0.0088,
+        "test_preparation_course_1.0": 0.001
+      }
+    },
+    "Reference only: Random Forest WITH Total_Score (leakage)": {
+      "train": {
+        "accuracy": 1.0,
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "high_precision": 1.0,
+        "high_recall": 1.0,
+        "high_f1": 1.0
+      },
+      "test": {
+        "accuracy": 0.9995,
+        "macro_precision": 0.9994,
+        "macro_recall": 0.9995,
+        "macro_f1": 0.9995,
+        "high_precision": 1.0,
+        "high_recall": 1.0,
+        "high_f1": 1.0
+      }
+    }
+  },
+  "tree_rules": "|--- Attendance (%) <= 64.99\n|   |--- class: High\n|--- Attendance (%) >  64.99\n|   |--- Attendance (%) <= 74.99\n|   |   |--- Attendance (%) <= 69.78\n|   |   |   |--- Attendance (%) <= 69.74\n|   |   |   |   |--- class: Medium\n|   |   |   |--- Attendance (%) >  69.74\n|   |   |   |   |--- class: Medium\n|   |   |--- Attendance (%) >  69.78\n|   |   |   |--- Assignments_Avg <= 58.29\n|   |   |   |   |--- class: Medium\n|   |   |   |--- Assignments_Avg >  58.29\n|   |   |   |   |--- class: Medium\n|   |--- Attendance (%) >  74.99\n|   |   |--- Projects_Score <= 52.41\n|   |   |   |--- Participation_Score <= 3.60\n|   |   |   |   |--- class: Low\n|   |   |   |--- Participation_Score >  3.60\n|   |   |   |   |--- class: Low\n|   |   |--- Projects_Score >  52.41\n|   |   |   |--- Quizzes_Avg <= 64.01\n|   |   |   |   |--- class: Low\n|   |   |   |--- Quizzes_Avg >  64.01\n|   |   |   |   |--- class: Low\n"
+}

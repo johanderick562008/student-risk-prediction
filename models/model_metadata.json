@@ -1,0 +1,23 @@
+{
+  "selected_model": "Decision Tree",
+  "features": [
+    "Attendance (%)",
+    "Midterm_Score",
+    "Assignments_Avg",
+    "Quizzes_Avg",
+    "Participation_Score",
+    "Projects_Score",
+    "test_preparation_course"
+  ],
+  "risk_thresholds": {
+    "high_attendance": 65.0,
+    "high_total": 55.0,
+    "medium_attendance": 75.0,
+    "medium_total": 65.0
+  },
+  "trained_at": "2026-10-04T08:27:38",
+  "train_rows": 7838,
+  "test_rows": 1960,
+  "sklearn_version": "1.6.1",
+  "python_version": "3.12.10"
+}
