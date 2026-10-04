@@ -139,6 +139,38 @@ def leaky_reference(X_train, X_test, y_train, y_test, df) -> dict:
             "test": compute_metrics(y_test, pipe.predict(Xte))}
 
 
+def save_metadata(selected: str, train_rows: int, test_rows: int) -> dict:
+    metadata = {
+        "selected_model": selected,
+        "features": MODEL_FEATURES,
+        "risk_thresholds": RISK_THRESHOLDS,
+        "trained_at": datetime.now().isoformat(timespec="seconds"),
+        "train_rows": train_rows,
+        "test_rows": test_rows,
+        "sklearn_version": sklearn.__version__,
+        "python_version": sys.version.split()[0],
+    }
+    MODEL_METADATA_PATH.write_text(json.dumps(metadata, indent=2))
+    return metadata
+
+
+def retrain_selected_model(name: str):
+    """
+    Refit the already-chosen model on the same training split and save it.
+
+    Used when the saved model was created with a different scikit-learn
+    version (see predict.load_model). Same data, same split, same settings
+    and random_state, so the result is the same model - it takes about a
+    second, unlike the full comparison in main().
+    """
+    df = add_risk_labels(clean_data(load_raw_data())[0])
+    X_train, X_test, y_train, _ = split_data(df)
+    pipe = make_pipeline(build_models()[name]).fit(X_train, y_train)
+    MODELS_DIR.mkdir(parents=True, exist_ok=True)
+    joblib.dump(pipe, MODEL_PATH)
+    return pipe, save_metadata(name, len(X_train), len(X_test))
+
+
 def main():
     # 1. Data + proxy labels ---------------------------------------------------
     raw = load_raw_data()
@@ -206,17 +238,7 @@ def main():
         tree_rules = export_text(fitted[selected].named_steps["model"],
                                  feature_names=feature_names(fitted[selected]))
 
-    metadata = {
-        "selected_model": selected,
-        "features": MODEL_FEATURES,
-        "risk_thresholds": RISK_THRESHOLDS,
-        "trained_at": datetime.now().isoformat(timespec="seconds"),
-        "train_rows": len(X_train),
-        "test_rows": len(X_test),
-        "sklearn_version": sklearn.__version__,
-        "python_version": sys.version.split()[0],
-    }
-    MODEL_METADATA_PATH.write_text(json.dumps(metadata, indent=2))
+    save_metadata(selected, len(X_train), len(X_test))
 
     metrics = {
         "selected_model": selected,

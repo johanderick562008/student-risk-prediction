@@ -10,6 +10,7 @@ import math
 
 import joblib
 import pandas as pd
+import sklearn
 
 from config import (
     MODEL_FEATURES,
@@ -35,11 +36,22 @@ def load_model():
         raise ModelNotFoundError(
             f"No trained model found at '{MODEL_PATH}'. "
             "Train it first with:  python src/train_model.py")
-    model = joblib.load(MODEL_PATH)
     metadata = {}
     if MODEL_METADATA_PATH.exists():
         metadata = json.loads(MODEL_METADATA_PATH.read_text())
-    return model, metadata
+
+    # A saved model should only be loaded by the scikit-learn version that
+    # created it. If the installed version differs (e.g. a newer Python on
+    # the hosting server needs a newer scikit-learn), quickly retrain the
+    # same model on the same data instead of risking errors.
+    saved_version = metadata.get("sklearn_version")
+    if saved_version and saved_version != sklearn.__version__:
+        from train_model import retrain_selected_model
+        print(f"Model was saved with scikit-learn {saved_version}, installed is "
+              f"{sklearn.__version__}: retraining it.")
+        return retrain_selected_model(metadata.get("selected_model", "Decision Tree"))
+
+    return joblib.load(MODEL_PATH), metadata
 
 
 def validate_input(student: dict) -> dict:

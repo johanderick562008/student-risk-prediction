@@ -1,11 +1,14 @@
-# Python 3.10 - 3.13
+# Python 3.10 or newer
 pandas>=2.2
 numpy>=1.26
 matplotlib>=3.8
 seaborn>=0.13
-# Pinned: a saved model (.pkl) should be loaded with the same scikit-learn
-# version that trained it.
-scikit-learn==1.6.1
+# 1.6.1 is the version the saved model was trained with (and it works with
+# Windows Smart App Control). It has no build for Python 3.14+, so newer
+# Pythons (e.g. Streamlit Community Cloud) get a newer release; the app then
+# retrains the model automatically on start-up (about a second).
+scikit-learn==1.6.1; python_version < "3.14"
+scikit-learn>=1.7.2; python_version >= "3.14"
 joblib>=1.3
 streamlit>=1.50
 pytest>=8
